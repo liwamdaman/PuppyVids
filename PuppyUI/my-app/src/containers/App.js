@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import VideoPlayer from '../components/VideoPlayer';
 import VideoInfo from '../components/VideoInfo';
+import { fetchRandomVideo } from '../actions';
 import './App.css';
 
-function App({videoID, videoTitle, videoAuthor}) {
+function App({videoID, videoTitle, videoAuthor, dispatch}) {
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +20,7 @@ function App({videoID, videoTitle, videoAuthor}) {
         </div>
         <div>
           <button type="button" onClick={e => {
-            alert('dispatch async video fetch')
+            dispatch(fetchRandomVideo());
           }}>
             Gimme Another!
           </button>

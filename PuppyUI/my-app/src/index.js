@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 import AppContainer from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import { updateVideo } from './actions'
+import { fetchRandomVideo } from './actions'
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -20,7 +20,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-store.dispatch(updateVideo({ id:'D-UmfqFjpl0', title: 'title', author:'author' }));
+store.dispatch(fetchRandomVideo());
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
