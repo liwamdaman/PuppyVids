@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import { UPDATE_VIDEO } from '../actions';
+import { RECEIVE_VIDEO } from '../actions';
 
 function video(state = {}, action) {
     switch (action.type) {
-        case UPDATE_VIDEO:
+        case RECEIVE_VIDEO:
             return Object.assign({}, state, 
                 {
                     id: action.videoData.id,

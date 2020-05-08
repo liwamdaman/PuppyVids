@@ -10,8 +10,8 @@ import rootReducer from '../reducers';
 // });
 
 // basic reducer test need to move elsewhere
-test('update videoID', () => {
+test('receive video data', () => {
     let state;
-    state = rootReducer({video:{}}, {type:'UPDATE_VIDEO',videoID:'hehe'});
-    expect(state).toEqual({ video:{ id:'hehe' } });
+    state = rootReducer({video:{}}, {type:'RECEIVE_VIDEO',videoData:{id:'testid',title:'testtitle',author:'testauthor'}});
+    expect(state).toEqual({ video:{ id:'testid',title:'testtitle',author:'testauthor' } });
 });

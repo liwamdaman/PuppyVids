@@ -1,9 +1,9 @@
 import fetch from 'cross-fetch';
 
-export const UPDATE_VIDEO = 'UPDATE_VIDEO';
-export function updateVideo(videoID, videoTitle, videoAuthor) {
+export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
+export function receiveVideo(videoID, videoTitle, videoAuthor) {
     return { 
-        type:UPDATE_VIDEO,
+        type:RECEIVE_VIDEO,
         videoData:{
             id: videoID,
             title: videoTitle,
@@ -22,7 +22,7 @@ export function fetchRandomVideo() {
             .then(
                 json => {
                     //console.log(json);
-                    dispatch(updateVideo('D-UmfqFjpl0','the time is',json.datetime));
+                    dispatch(receiveVideo('D-UmfqFjpl0','the time is',json.datetime));
                 }
             )
     }
