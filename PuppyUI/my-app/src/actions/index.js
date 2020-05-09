@@ -14,15 +14,15 @@ export function receiveVideo(videoID, videoTitle, videoAuthor) {
 
 export function fetchRandomVideo() {
     return function(dispatch) {
-        return fetch("http://worldtimeapi.org/api/ip")
+        return fetch("/videos")
             .then(
                 response => response.json(),
                 error => console.log('An error occurred.', error)
             )
             .then(
                 json => {
-                    //console.log(json);
-                    dispatch(receiveVideo('D-UmfqFjpl0','the time is',json.datetime));
+                    console.log(json);
+                    dispatch(receiveVideo(json.id,json.title,json.author));
                 }
             )
     }
