@@ -1,8 +1,7 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-#import dbClient
+import youtubeAPIClient
 
 app = Flask(__name__)
 app.config.from_envvar('APPLICATION_SETTINGS')
@@ -25,8 +24,23 @@ def videos():
             "id": video.videoID,
             "title": video.title,
             "author": video.author
-        }
-    #if request.method == 'POST':
+        },200
+    if request.method == 'POST':
+        # assuming form includes youtubeURL, if not 400 response will be returned automatically by flask
+        youtubeURL = request.form['youtubeURL']
+        videoID = youtubeAPIClient.parseIDFromURL(youtubeURL)
+        if videoID == None:
+            return "Invalid URL", 400
 
-        #AIzaSyC4tATsCOUCoxe9XxfgLkkWYqUlFYMY6M4
-        #dbClient.insertVideo(username)
+        try:
+            title = request.form['title']
+            author = request.form['author']
+        except KeyError:
+            # title and author need to be determined
+            title, author = youtubeAPIClient.getTitleAndAuthorFromVideo(videoID)
+            if title==None or author==None:
+                return "Something Went Wrong", 500
+        finally:
+            dbClient.insertVideo(videoID, title, author)
+
+        return "Resource Created", 201

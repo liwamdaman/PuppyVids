@@ -5,5 +5,8 @@ def queryRandomVideo():
     videos = Videos.query.all()
     return videos[random.randint(0,len(videos)-1)]
 
-#def insertVideo():
-#    video = Videos(videoID='')
+# params are all strings
+def insertVideo(videoID, title, author):
+    video = Videos(videoID=videoID, title=title, author=author)
+    db.session.add(video)
+    db.session.commit()
