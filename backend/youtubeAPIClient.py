@@ -1,6 +1,7 @@
 import requests
 import re
-API_KEY='AIzaSyC4tATsCOUCoxe9XxfgLkkWYqUlFYMY6M4'
+from app import app
+API_KEY = app.config['API_KEY']
 
 # Utility for parsing video id from video url
 # youtubeURL: string
@@ -22,7 +23,7 @@ def getTitleAndAuthorFromVideo(videoID):
     r = requests.get('https://www.googleapis.com/youtube/v3/videos', params=args)
 
     if r.status_code!=200 and r.status_code!=202:
-        #print(r.status_code)
+        print(r.status_code)
         return None, None
     
     videoInfo = r.json().get('items')[0]
