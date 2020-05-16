@@ -2,9 +2,9 @@ import React from 'react';
 
 function VideoInfo({videoTitle, videoAuthor}) {
     return (
-        <div className="test">
+        <div>
             <span className="Title">{videoTitle}</span>
-            <span className="Author">{videoAuthor}</span>
+            <span className="Author">By: {videoAuthor}</span>
         </div>
     );
 }

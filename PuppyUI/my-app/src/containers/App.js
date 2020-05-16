@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import VideoPlayer from '../components/VideoPlayer';
 import VideoInfo from '../components/VideoInfo';
-import { fetchRandomVideo } from '../actions';
+import AddVideo from './AddVideo';
+import { fetchRandomVideo, uploadVideo } from '../actions';
 import './App.css';
 
-function App({videoID, videoTitle, videoAuthor, dispatch}) {
+function App({videoID, videoTitle, videoAuthor, uploadError, fetchRandomVideo, uploadVideo}) {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,12 +19,13 @@ function App({videoID, videoTitle, videoAuthor, dispatch}) {
         <div className="VideoInfo">
           <VideoInfo videoTitle={videoTitle} videoAuthor={videoAuthor} />
         </div>
-        <div>
-          <button type="button" onClick={e => {
-            dispatch(fetchRandomVideo());
-          }}>
-            Gimme Another!
-          </button>
+        <button className="NewVidButton" type="button" onClick={e => {
+          fetchRandomVideo();
+        }}>
+          Gimme Another!
+        </button>
+        <div className="AddVideo">
+          <AddVideo uploadError={uploadError} uploadVideo={uploadVideo} />
         </div>
       </body>
     </div>
@@ -34,10 +36,18 @@ function mapStateToProps(state) {
   return {
     videoID: state.video.id,
     videoTitle: state.video.title,
-    videoAuthor: state.video.author
+    videoAuthor: state.video.author,
+    uploadError: state.uploadError
   }
 }
 
-const AppContainer = connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchRandomVideo: () => dispatch(fetchRandomVideo()),
+    uploadVideo: youtubeURL => dispatch(uploadVideo(youtubeURL))
+  }
+}
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;

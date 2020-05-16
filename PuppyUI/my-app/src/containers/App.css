@@ -2,27 +2,41 @@
   text-align: center;
 }
 
-/* .App-header {
+.App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-} */
+}
 
 .VideoPlayer {
-  padding: 50px;
+  padding: 25px;
 }
 
-.Title {
-  margin: 10px;
-  font-size: 20px;
+.VideoInfo
+  .Title {
+    margin: 10px;
+    font-size: large;
+  }
+
+  .Author {
+    margin-left: 50px;
+    font-size: medium;
+  }
+
+.NewVidButton {
+  margin: 15px;
 }
 
-.Author {
-  margin-left: 50px;
-  font-size: 15px;
-}
+.AddVideo
+  .UploadErrorMessage {
+    color: crimson;
+  }
+
+  .UploadNote {
+    font-size: small;
+  }
