@@ -29,7 +29,12 @@ def videos():
         youtubeURL = request.form['youtubeURL']
         videoID = youtubeAPIClient.parseIDFromURL(youtubeURL)
         if videoID == None:
-            return "Invalid URL", 400
+            return {
+                "error":{
+                    "code":400,
+                    "message":"Invalid URL"
+                }
+            }, 400
 
         try:
             title = request.form['title']
@@ -38,8 +43,17 @@ def videos():
             # title and author need to be determined
             title, author = youtubeAPIClient.getTitleAndAuthorFromVideo(videoID)
             if title==None or author==None:
-                return "Something Went Wrong", 500
+                return {
+                    "error":{
+                        "code":500,
+                        "message":"Internal Server Error"
+                    }
+                }, 500
         finally:
             dbClient.insertVideo(videoID, title, author)
 
-        return "Resource Created", 201
+        return {
+            "id": videoID,
+            "title": title,
+            "author": author
+        }, 201
