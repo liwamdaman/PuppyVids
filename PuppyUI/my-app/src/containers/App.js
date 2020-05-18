@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import VideoPlayer from '../components/VideoPlayer';
 import VideoInfo from '../components/VideoInfo';
-import AddVideo from './AddVideo';
+import AddVideo from '../components/AddVideo';
 import { fetchRandomVideo, uploadVideo } from '../actions';
 import './App.css';
 
@@ -10,7 +10,7 @@ function App({videoID, videoTitle, videoAuthor, uploadError, fetchRandomVideo, u
   return (
     <div className="App">
       <header className="App-header">
-        enjoy cute doggo
+        Enjoy Cute Doggo
       </header>
       <body>
         <div className="VideoPlayer">

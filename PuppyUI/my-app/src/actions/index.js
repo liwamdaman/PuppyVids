@@ -57,7 +57,7 @@ export function uploadVideo(youtubeURL) {
         .then(
             response => {
                 if(response.status !== 201){
-                    return Promise.reject(response.statusText);
+                    return Promise.reject(response.status);
                 }
                 return Promise.resolve(response.json());
             },
@@ -65,7 +65,24 @@ export function uploadVideo(youtubeURL) {
         )
         .then(
             json => dispatch(receiveVideo(json.id,json.title,json.author)),
-            errorMessage => dispatch(setUploadAsFailed(errorMessage))
+            statusCode => {
+                let errorMessage;
+                switch(statusCode) {
+                    case 400:
+                        errorMessage = 'Not a Youtube video';
+                        break;
+                    // Perhaps should create a new 4xx status code for this:
+                    case 406:
+                        errorMessage = 'Not a Dog Video!';
+                        break;
+                    case 500:
+                        errorMessage = 'Internal Server Error';
+                        break;
+                    default:
+                        errorMessage = 'Bad Request';
+                }
+                dispatch(setUploadAsFailed(errorMessage));
+            }
         )
     }
 }

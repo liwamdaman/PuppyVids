@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'Roboto-Slab';
+  src: local('Roboto-Slab'), url(../fonts/RobotoSlab-VariableFont_wght.ttf) format('truetype')
+}
+
 .App {
   text-align: center;
+  font-family: Roboto-Slab;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: burlywood;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -14,22 +20,21 @@
 }
 
 .VideoPlayer {
-  padding: 25px;
+  padding: 10px;
 }
 
 .VideoInfo
   .Title {
-    margin: 10px;
-    font-size: large;
+    font-size: x-large;
   }
 
   .Author {
-    margin-left: 50px;
+    margin-left: 100px;
     font-size: medium;
   }
 
 .NewVidButton {
-  margin: 15px;
+  margin: 20px;
 }
 
 .AddVideo

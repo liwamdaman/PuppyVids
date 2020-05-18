@@ -17,7 +17,7 @@ function AddVideo({uploadError, uploadVideo}) {
           textInput.current.value = '';
         }}
       >
-        <input ref={textInput} />
+        <input placeholder="Paste URL Here" ref={textInput} />
         <button type="submit">Add Your Own Youtube Video!</button>
       </form>
       <div className="UploadNote">
