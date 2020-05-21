@@ -1,5 +1,7 @@
 import fetch from 'cross-fetch';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export function receiveVideo(videoID, videoTitle, videoAuthor) {
     return { 
@@ -30,14 +32,13 @@ export function resetUploadState(){
 // Thunks
 export function fetchRandomVideo() {
     return function(dispatch) {
-        return fetch("/videos")
+        return fetch(API_URL + "videos")
             .then(
                 response => response.json(),
                 error => console.log('An error occurred.', error)
             )
             .then(
                 json => {
-                    //console.log(json);
                     dispatch(receiveVideo(json.id,json.title,json.author));
                 }
             )
@@ -50,7 +51,7 @@ export function uploadVideo(youtubeURL) {
 
         const formData = new FormData();
         formData.append('youtubeURL', youtubeURL);
-        return fetch("/videos", {
+        return fetch(API_URL + "videos", {
             method: 'POST',
             body: formData
         })
@@ -79,7 +80,7 @@ export function uploadVideo(youtubeURL) {
                         errorMessage = 'Internal Server Error';
                         break;
                     default:
-                        errorMessage = 'Bad Request';
+                        errorMessage = statusCode;
                 }
                 dispatch(setUploadAsFailed(errorMessage));
             }
