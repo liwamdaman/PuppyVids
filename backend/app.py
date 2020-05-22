@@ -51,8 +51,8 @@ def videos():
                         "message":"Internal Server Error"
                     }
                 }, 500
-        finally:
-            dbClient.insertVideo(videoID, title, author)
+
+        dbClient.insertVideo(videoID, title, author)
 
         return {
             "id": videoID,

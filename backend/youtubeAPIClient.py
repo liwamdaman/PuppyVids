@@ -24,6 +24,7 @@ def getTitleAndAuthorFromVideo(videoID):
 
     if r.status_code!=200 and r.status_code!=202:
         print(r.status_code)
+        print(r.text)
         return None, None
     
     videoInfo = r.json().get('items')[0]
